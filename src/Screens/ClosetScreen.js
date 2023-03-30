@@ -17,7 +17,6 @@ const ClosetScreen = ( {clothingArray, addHelper, addDirtyClothes} ) => {
       <div className="closetHeader">
         <h1>Closet</h1>
         <div className="closetHeaderButtons">
-          <Button className="closetHeaderButtonItem">Search</Button>
           <Link to="/add_item">
             <Button>Add</Button>
           </Link>

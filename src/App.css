@@ -1,5 +1,5 @@
-.background-gradient{
-  background: linear-gradient(180deg, #45605E 28.72%, #253433 100%);
+.background-gradient {
+  background: linear-gradient(180deg, #45605e 28.72%, #253433 100%);
 }
 
 .App {
@@ -42,10 +42,10 @@
 }
 
 .navbar {
-  border-bottom: solid 1px #EBEBEB;
+  border-bottom: solid 1px #ebebeb;
 }
 .bottom-tab-nav {
-  border-top: solid 1px #EBEBEB;
+  border-top: solid 1px #ebebeb;
 }
 .nav-link,
 .bottom-nav-link {
@@ -111,6 +111,8 @@
   margin-bottom: 5px;
   margin-top: 5px;
   border-radius: 10px;
-  border-width: 0;
+  border-width: 1px;
   padding: 5px;
+  border-color: #8d92a0;
+  border-style: solid;
 }

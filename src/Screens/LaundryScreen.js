@@ -9,7 +9,6 @@ const LaundryScreen = (props) => {
     <div>
       <div className="closetHeader">
         <h1>Laundry</h1>
-        <Button className="closetHeaderButtonItem">Search</Button>
       </div>
       <ClothingViewer clothingArray={props.dirtyClothes} />
     </div>
