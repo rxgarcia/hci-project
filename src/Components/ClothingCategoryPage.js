@@ -1,8 +1,14 @@
 import * as React from "react";
 import clothingArray from "../Data/DummyData";
+import { Container, Navbar, Nav, NavItem } from "react-bootstrap";
+
 
 const ClothingCategoryViewer = (props) => {
   console.log(props.category);
+
+  const handleItemClicked = () => {
+
+  }
 
   return (
     <div className="clothingViewerContainer">
@@ -13,7 +19,9 @@ const ClothingCategoryViewer = (props) => {
           }
         })
         .map((item, index) => {
-          return <img className="categoryItem" src={item.image} />;
+          return <Nav.Link href={"/item/" + item.id}>
+            <img className="categoryItem" src={item.image} alt="img"/>
+          </Nav.Link>;
         })}
     </div>
   );
