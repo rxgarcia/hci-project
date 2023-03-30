@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/hci-project/static/css/main.6913bd11.css",
-    "main.js": "/hci-project/static/js/main.bac9ac48.js",
+    "main.js": "/hci-project/static/js/main.c4b6d9ba.js",
     "static/js/787.232ed522.chunk.js": "/hci-project/static/js/787.232ed522.chunk.js",
     "static/media/logo.svg": "/hci-project/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/hci-project/index.html",
     "main.6913bd11.css.map": "/hci-project/static/css/main.6913bd11.css.map",
-    "main.bac9ac48.js.map": "/hci-project/static/js/main.bac9ac48.js.map",
+    "main.c4b6d9ba.js.map": "/hci-project/static/js/main.c4b6d9ba.js.map",
     "787.232ed522.chunk.js.map": "/hci-project/static/js/787.232ed522.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6913bd11.css",
-    "static/js/main.bac9ac48.js"
+    "static/js/main.c4b6d9ba.js"
   ]
 }
