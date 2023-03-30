@@ -3,10 +3,12 @@ import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import ClothingViewer from "../Components/ClothingViewer";
 
-const ClosetScreen = () => {
+const ClosetScreen = ( {clothingArray} ) => {
   const handleSearch = () => {
     console.log("searched");
   };
+
+  console.log(clothingArray);
 
   return (
     <div>
@@ -19,7 +21,7 @@ const ClosetScreen = () => {
           </Link>
         </div>
       </div>
-      <ClothingViewer />
+      <ClothingViewer clothingArray={clothingArray}/>
     </div>
   );
 };

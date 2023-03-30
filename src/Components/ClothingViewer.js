@@ -3,7 +3,7 @@ import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import ClothingCategoryViewer from "./ClothingCategoryPage";
 
-const ClothingViewer = () => {
+const ClothingViewer = ( {clothingArray }) => {
   return (
     <div className="categorySelectorContainer">
       <Tabs
@@ -13,19 +13,19 @@ const ClothingViewer = () => {
         fill
       >
         <Tab eventKey="all" title="All">
-          <ClothingCategoryViewer category="all" />
+          <ClothingCategoryViewer category="all" clothingArray={clothingArray} />
         </Tab>
         <Tab eventKey="tops" title="Tops">
-          <ClothingCategoryViewer category="Top" />
+          <ClothingCategoryViewer category="Top" clothingArray={clothingArray}/>
         </Tab>
         <Tab eventKey="bottoms" title="Bottoms">
-          <ClothingCategoryViewer category="Bottom" />
+          <ClothingCategoryViewer category="Bottom" clothingArray={clothingArray}/>
         </Tab>
         <Tab eventKey="shoes" title="Shoes">
-          <ClothingCategoryViewer category="Shoes" />
+          <ClothingCategoryViewer category="Shoes" clothingArray={clothingArray}/>
         </Tab>
         <Tab eventKey="saved" title="Saved">
-          <ClothingCategoryViewer category="saved" />
+          <ClothingCategoryViewer category="saved" clothingArray={clothingArray}/>
         </Tab>
       </Tabs>
     </div>

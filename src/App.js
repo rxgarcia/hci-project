@@ -9,19 +9,22 @@ import ItemScreen from './Screens/ItemScreen';
 import NavBar from './Components/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AddItemScreen from './Screens/AddItemScreen';
+import clothingArray from './Data/DummyData';
+import { useState } from 'react';
 
 
 function App() {
+  let [data, setData] = useState(clothingArray);
   return (
     <Router>
       <div>
         <Routes>
           <Route path="/" element={<HomeScreen />}/>
-          <Route path="/closet" element={<ClosetScreen />}/>
+          <Route path="/closet" element={<ClosetScreen clothingArray={data}/>}/>
           <Route path="/laundry" element={<LaundryScreen />}/>
           <Route path="/generate" element={<GenerationScreen />}/>
-          <Route path="/item/:id" element={<ItemScreen />}/>
-          <Route path="/add_item" element={<AddItemScreen />}/>
+          <Route path="/item/:id" element={<ItemScreen clothingArray={data}/>}/>
+          <Route path="/add_item" element={<AddItemScreen clothingArray={data} setData={setData}/>}/>
         </Routes>
       </div>
       <NavBar /> 

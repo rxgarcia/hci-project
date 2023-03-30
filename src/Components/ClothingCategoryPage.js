@@ -1,10 +1,10 @@
 import * as React from "react";
-import clothingArray from "../Data/DummyData";
 import { Container, Navbar, Nav, NavItem } from "react-bootstrap";
 
 
 const ClothingCategoryViewer = (props) => {
   console.log(props.category);
+  let clothingArray = props.clothingArray;
 
   const handleItemClicked = () => {
 

@@ -4,7 +4,7 @@ import './ItemScreen.css'
 import { clothingArray } from "../Data/DummyData";
 import { Link, redirect, useNavigate } from "react-router-dom";
 
-const AddItemScreen = () => {
+const AddItemScreen = ({clothingArray, setData}) => {
 // {
 //     title: "Patagonia Synchilla White Fleece",
 //     description: "Patagonia Synchilla White Fleece with blue trim.",
@@ -23,7 +23,7 @@ const AddItemScreen = () => {
   let [colors, setColors] = useState("");
   let [size, setSize] = useState("S");
   let [wears, setWears] = useState("");
-  let [category, setCategory] = useState("Tops");
+  let [category, setCategory] = useState("Top");
   let [comfort, setComfort] = useState("Casual");
   let [weather, setWeather] = useState("Cold");
   let [image, setImage] = useState(null);
@@ -51,7 +51,7 @@ const AddItemScreen = () => {
         weather: weather,
         comfort: comfortLevels[comfort],
     }
-    clothingArray.push(newArrayObj);
+    setData([...clothingArray, newArrayObj]);
     console.log(clothingArray);
   }
   let comfortLevels = {
@@ -96,8 +96,8 @@ const AddItemScreen = () => {
 
                 <div style={{fontWeight: 600}}> Clothing Category</div>
                 <select name="Category" onChange={(e) => setCategory(e.target.value) }>
-                    <option value="Tops"> Tops </option>
-                    <option value="Bottoms"> Bottoms </option>
+                    <option value="Top"> Top </option>
+                    <option value="Bottom"> Bottom </option>
                     <option value="Shoes"> Shoes </option>
                 </select>
 
