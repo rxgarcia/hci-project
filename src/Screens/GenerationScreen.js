@@ -107,6 +107,7 @@ const GenerationScreen = (props) => {
 
   const handleConfirmOutfit = () => {
     props.setCurrentOutfit(previewOutfit);
+    props.addDirtyClothes(previewOutfit);
     setPreviewOutfit([]);
   };
 
