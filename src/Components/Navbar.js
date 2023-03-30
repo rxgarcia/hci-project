@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Container, Navbar, Nav, NavItem } from "react-bootstrap";
+import { Container, NavItem, Nav } from "react-bootstrap";
+import { Link } from 'react-router-dom';
 
 const tabs = [
   {
@@ -34,11 +35,11 @@ const AppNavBar = () => {
         <div className=" d-flex flex-row justify-content-around w-100">
           {tabs.map((tab, index) => (
             <NavItem key={`tab-${index}`}>
-              <Nav.Link href={tab.route} className="nav-link bottom-nav-link">
+              <Link to={tab.route} className="nav-link bottom-nav-link">
                 <div className="row d-flex flex-column justify-content-center align-items-center">
                   <div className="bottom-tab-label">{tab.label}</div>
                 </div>
-              </Nav.Link>
+              </Link>
             </NavItem>
           ))}
         </div>
