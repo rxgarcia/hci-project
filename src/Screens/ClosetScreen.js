@@ -1,9 +1,24 @@
-import * as React from 'react';
+import * as React from "react";
+import Button from "react-bootstrap/Button";
+import ClothingViewer from "../Components/ClothingViewer";
 
 const ClosetScreen = () => {
-    return (
-        <h1>Closet Screen</h1>
-    )
+  const handleSearch = () => {
+    console.log("searched");
+  };
+
+  return (
+    <div>
+      <div className="closetHeader">
+        <h1>Closet</h1>
+        <div className="closetHeaderButtons">
+          <Button className="closetHeaderButtonItem">Search</Button>
+          <Button>Add</Button>
+        </div>
+      </div>
+      <ClothingViewer />
+    </div>
+  );
 };
 
 export default ClosetScreen;

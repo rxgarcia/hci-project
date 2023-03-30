@@ -100,3 +100,5 @@ let clothingArray = [
     comfort: 2,
   },
 ];
+
+export default clothingArray;
