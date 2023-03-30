@@ -1,5 +1,6 @@
 export let clothingArray = [
   {
+    id: 1,
     title: "Patagonia Synchilla White Fleece",
     description: "Patagonia Synchilla White Fleece with blue trim.",
     colors: ["White"],
@@ -13,6 +14,7 @@ export let clothingArray = [
     comfort: 1,
   },
   {
+    id: 2,
     title: "North Face Beige Pants",
     description: "All beige pants with drawstring.",
     colors: ["Beige"],
@@ -25,6 +27,7 @@ export let clothingArray = [
     comfort: 2,
   },
   {
+    id: 3,
     title: "New Balance 574 White Shoes",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed porttitor turpis. Nam pellentesque quis justo a pulvinar. Sed mollis lectus a sagittis facilisis. Donec accumsan vulputate egestas. Morbi efficitur nulla sed libero viverra euismod. Curabitur et libero ut orci molestie laoreet eget nec nibh. Aliquam sollicitudin arcu ligula, nec posuere eros vehicula vel. Donec id erat quis velit aliquet pharetra vitae vitae tortor.",
@@ -39,6 +42,7 @@ export let clothingArray = [
     comfort: 1,
   },
   {
+    id: 4,
     title: "Grey Button Pocket Shirt",
     description: "Its already old but good for undershirts",
     colors: ["Gray"],
@@ -51,6 +55,7 @@ export let clothingArray = [
     comfort: 2,
   },
   {
+    id: 5,
     title: "Blue Uniqlo Shirt",
     description: "Its already old but good for undershirts",
     colors: ["Blue"],
@@ -63,6 +68,7 @@ export let clothingArray = [
     comfort: 2,
   },
   {
+    id: 6,
     title: "NY Hat",
     description: "Its already old but good for undershirts",
     colors: ["Gray"],
@@ -75,6 +81,7 @@ export let clothingArray = [
     comfort: 2,
   },
   {
+    id: 7,
     title: "Nike Old shoes",
     description: "Its already old but good for undershirts",
     colors: ["White"],
@@ -86,7 +93,9 @@ export let clothingArray = [
     category: "Shoes",
     weather: "Any",
     comfort: 2,
-  },  {
+  },
+  {
+    id: 8,
     title: "Chamption big beige hoodie",
     description: "Its already old but good for undershirts",
     colors: ["Beige"],
@@ -100,3 +109,5 @@ export let clothingArray = [
     comfort: 2,
   },
 ];
+
+export default clothingArray;
