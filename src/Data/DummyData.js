@@ -1,4 +1,4 @@
-let clothingArray = [
+export let clothingArray = [
   {
     title: "Patagonia Synchilla White Fleece",
     description: "Patagonia Synchilla White Fleece with blue trim.",

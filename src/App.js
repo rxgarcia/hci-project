@@ -19,7 +19,7 @@ function App() {
           <Route path="/closet" element={<ClosetScreen />}/>
           <Route path="/laundry" element={<LaundryScreen />}/>
           <Route path="/generate" element={<GenerationScreen />}/>
-          <Route path="/item:id" element={<ItemScreen />}/>
+          <Route path="/item/:id" element={<ItemScreen />}/>
         </Routes>
       </div>
       <NavBar /> 
