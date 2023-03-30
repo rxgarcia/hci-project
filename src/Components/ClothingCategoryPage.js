@@ -1,14 +1,12 @@
 import * as React from "react";
 import { Container, Navbar, Nav, NavItem } from "react-bootstrap";
-
+import { Link } from "react-router-dom";
 
 const ClothingCategoryViewer = (props) => {
   console.log(props.category);
   let clothingArray = props.clothingArray;
 
-  const handleItemClicked = () => {
-
-  }
+  const handleItemClicked = () => {};
 
   return (
     <div className="clothingViewerContainer">
@@ -19,9 +17,11 @@ const ClothingCategoryViewer = (props) => {
           }
         })
         .map((item, index) => {
-          return <Nav.Link href={"/item/" + item.id}>
-            <img className="categoryItem" src={item.image} alt="img"/>
-          </Nav.Link>;
+          return (
+            <Link to={"/item/" + item.id}>
+              <img className="categoryItem" src={item.image} alt="img" />
+            </Link>
+          );
         })}
     </div>
   );
