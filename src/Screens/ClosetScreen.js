@@ -1,9 +1,11 @@
 import * as React from "react";
 import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ClothingViewer from "../Components/ClothingViewer";
 
-const ClosetScreen = ( {clothingArray} ) => {
+const ClosetScreen = ( {clothingArray, addHelper, addDirtyClothes} ) => {
+  const state = useLocation();
+  console.log(state)
   const handleSearch = () => {
     console.log("searched");
   };
@@ -21,7 +23,7 @@ const ClosetScreen = ( {clothingArray} ) => {
           </Link>
         </div>
       </div>
-      <ClothingViewer clothingArray={clothingArray}/>
+      <ClothingViewer clothingArray={clothingArray} homeDetails={state} addHelper={addHelper} addDirtyClothes={addDirtyClothes}/>
     </div>
   );
 };

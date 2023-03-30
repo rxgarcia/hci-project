@@ -118,4 +118,6 @@ export let clothingArray = [
   },
 ];
 
+export const layers = ["top", "bottom", "shoes"]
+
 export default clothingArray;
