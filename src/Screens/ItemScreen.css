@@ -25,3 +25,9 @@
     margin-left: 10vw;
     margin-right: 10vw;
 }
+
+.addItemScreen {
+    background: linear-gradient(180deg, #45605E 28.72%, #253433 100%);
+    padding-bottom: 100px;
+    padding-top: 1px;
+}

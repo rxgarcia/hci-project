@@ -24,7 +24,7 @@ const ItemScreen = ({ clothingArray }) => {
   let itemAttrClass = "w-100";
 
   return (
-    <div className="h-100 fullscreen-background">
+    <div className="addItemScreen">
       <div
         className="d-flex justify-content-center align-items-center clickable"
         style={{

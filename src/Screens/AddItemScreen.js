@@ -62,7 +62,7 @@ const AddItemScreen = ({ clothingArray, setData }) => {
     Formal: 4,
   };
   return (
-    <div className="h-100 fullscreen-background">
+    <div className="addItemScreen">
       <div>
         <div
           className="d-flex justify-content-center align-items-center text-white"
