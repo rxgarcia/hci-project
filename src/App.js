@@ -15,14 +15,17 @@ import { useState } from 'react';
 
 function App() {
   let [data, setData] = useState(clothingArray);
+  let [currentWeather, setCurrentWeather] = useState("Cold");
+  let [currentOutfit, setCurrentOutfit] = useState([]);
+
   return (
     <Router>
       <div>
         <Routes>
-          <Route path="/" element={<HomeScreen />}/>
+          <Route path="/" element={<HomeScreen currentOutfit={currentOutfit}/>}/>
           <Route path="/closet" element={<ClosetScreen clothingArray={data}/>}/>
           <Route path="/laundry" element={<LaundryScreen />}/>
-          <Route path="/generate" element={<GenerationScreen />}/>
+          <Route path="/generate" element={<GenerationScreen clothingArray={data} currentWeather={currentWeather} setCurrentOutfit={setCurrentOutfit}/>}/>
           <Route path="/item/:id" element={<ItemScreen clothingArray={data}/>}/>
           <Route path="/add_item" element={<AddItemScreen clothingArray={data} setData={setData}/>}/>
         </Routes>

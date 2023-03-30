@@ -12,6 +12,7 @@ export let clothingArray = [
     category: "Top",
     weather: "Cold",
     comfort: 1,
+    totalWears: 4,
   },
   {
     id: 2,
@@ -25,6 +26,7 @@ export let clothingArray = [
     category: "Bottom",
     weather: "Cold",
     comfort: 2,
+    totalWears: 5,
   },
   {
     id: 3,
@@ -40,6 +42,7 @@ export let clothingArray = [
     category: "Shoes",
     weather: "Any",
     comfort: 1,
+    totalWears: 6,
   },
   {
     id: 4,
@@ -53,6 +56,7 @@ export let clothingArray = [
     category: "Top",
     weather: "Warm",
     comfort: 2,
+    totalWears: 9,
   },
   {
     id: 5,
@@ -66,6 +70,7 @@ export let clothingArray = [
     category: "Top",
     weather: "Warm",
     comfort: 2,
+    totalWears: 1,
   },
   {
     id: 6,
@@ -79,6 +84,7 @@ export let clothingArray = [
     category: "Hat",
     weather: "Any",
     comfort: 2,
+    totalWears: 7,
   },
   {
     id: 7,
@@ -93,6 +99,7 @@ export let clothingArray = [
     category: "Shoes",
     weather: "Any",
     comfort: 2,
+    totalWears: 2,
   },
   {
     id: 8,
@@ -107,6 +114,7 @@ export let clothingArray = [
     category: "Top",
     weather: "Cold",
     comfort: 2,
+    totalWears: 4,
   },
 ];
 

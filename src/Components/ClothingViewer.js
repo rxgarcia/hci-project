@@ -3,7 +3,7 @@ import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import ClothingCategoryViewer from "./ClothingCategoryPage";
 
-const ClothingViewer = ( {clothingArray }) => {
+const ClothingViewer = ( {clothingArray, addSelectedItems, selectItems }) => {
   return (
     <div className="categorySelectorContainer">
       <Tabs
@@ -13,19 +13,19 @@ const ClothingViewer = ( {clothingArray }) => {
         fill
       >
         <Tab eventKey="all" title="All">
-          <ClothingCategoryViewer category="all" clothingArray={clothingArray} />
+          <ClothingCategoryViewer category="all" clothingArray={clothingArray} addSelectedItems={addSelectedItems} selectItems={selectItems}/>
         </Tab>
         <Tab eventKey="tops" title="Tops">
-          <ClothingCategoryViewer category="Top" clothingArray={clothingArray}/>
+        <ClothingCategoryViewer category="Top" clothingArray={clothingArray} addSelectedItems={addSelectedItems} selectItems={selectItems}/>
         </Tab>
         <Tab eventKey="bottoms" title="Bottoms">
-          <ClothingCategoryViewer category="Bottom" clothingArray={clothingArray}/>
+        <ClothingCategoryViewer category="Bottom" clothingArray={clothingArray} addSelectedItems={addSelectedItems} selectItems={selectItems}/>
         </Tab>
         <Tab eventKey="shoes" title="Shoes">
-          <ClothingCategoryViewer category="Shoes" clothingArray={clothingArray}/>
+        <ClothingCategoryViewer category="Shoes" clothingArray={clothingArray} addSelectedItems={addSelectedItems} selectItems={selectItems}/>
         </Tab>
         <Tab eventKey="saved" title="Saved">
-          <ClothingCategoryViewer category="saved" clothingArray={clothingArray}/>
+        <ClothingCategoryViewer category="saved" clothingArray={clothingArray} addSelectedItems={addSelectedItems} selectItems={selectItems}/>
         </Tab>
       </Tabs>
     </div>

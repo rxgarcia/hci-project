@@ -79,6 +79,10 @@
   background-color: #cacaca4c;
 }
 
+.generationContainer {
+  flex-direction: column;
+}
+
 .categoryItem {
   width: 100px;
   height: 100px;
@@ -90,4 +94,13 @@
 .categorySelectorContainer {
   margin-left: 20px;
   margin-right: 20px;
+}
+
+.genSlider {
+  display: flex;
+  flex-direction: row;
+}
+
+.genScreen {
+  margin-bottom: 50px;
 }

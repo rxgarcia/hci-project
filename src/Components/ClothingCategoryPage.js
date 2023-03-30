@@ -17,11 +17,15 @@ const ClothingCategoryViewer = (props) => {
           }
         })
         .map((item, index) => {
-          return (
-            <Link to={"/item/" + item.id}>
-              <img className="categoryItem" src={item.image} alt="img" />
-            </Link>
-          );
+          if (props.selectItems) {
+            return <img onClick={() => {props.addSelectedItems(item)}} className="categoryItem" src={item.image} alt="img" />;
+          } else {
+            return (
+              <Link to={"/item/" + item.id}>
+                <img className="categoryItem" src={item.image} alt="img" />
+              </Link>
+            );
+          }
         })}
     </div>
   );
