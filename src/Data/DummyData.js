@@ -1,4 +1,4 @@
-let clothingArray = [
+export let clothingArray = [
   {
     id: 1,
     title: "Patagonia Synchilla White Fleece",
