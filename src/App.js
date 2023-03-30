@@ -86,7 +86,7 @@ function App() {
           />
           <Route
             path="/laundry"
-            element={<LaundryScreen dirtyClothes={dirtyClothes} />}
+            element={<LaundryScreen dirtyClothes={dirtyClothes} setDirtyClothes={setDirtyClothes}/>}
           />
           <Route
             path="/generate"
