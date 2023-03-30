@@ -2,7 +2,6 @@ import * as React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import '../App.css'
 import './ItemScreen.css'
-import { clothingArray } from "../Data/DummyData";
 // {
 //     title: "Patagonia Synchilla White Fleece",
 //     description: "Patagonia Synchilla White Fleece with blue trim.",
@@ -16,7 +15,7 @@ import { clothingArray } from "../Data/DummyData";
 //     weather: "Cold",
 //     comfort: 1,
 //   },
-const ItemScreen = () => {
+const ItemScreen = ({ clothingArray }) => {
     let params = useParams();
     let nav = useNavigate();
     console.log(clothingArray);
