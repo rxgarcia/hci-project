@@ -8,6 +8,7 @@ import LaundryScreen from './Screens/LaundryScreen';
 import ItemScreen from './Screens/ItemScreen';
 import NavBar from './Components/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import AddItemScreen from './Screens/AddItemScreen';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/laundry" element={<LaundryScreen />}/>
           <Route path="/generate" element={<GenerationScreen />}/>
           <Route path="/item/:id" element={<ItemScreen />}/>
+          <Route path="/add_item" element={<AddItemScreen />}/>
         </Routes>
       </div>
       <NavBar /> 

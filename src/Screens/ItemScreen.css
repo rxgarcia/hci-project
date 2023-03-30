@@ -1,6 +1,9 @@
 .item-header {
     font-size: 1.75rem;
 }
+.clickable{
+    cursor: pointer;
+}
 
 .fullscreen-background {
 
@@ -19,7 +22,6 @@
 
     /* Note: backdrop-filter has minimal browser support */
     border-radius: 10px;
-    margin-top: 10vh;
     margin-left: 10vw;
     margin-right: 10vw;
 }

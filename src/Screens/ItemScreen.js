@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import '../App.css'
 import './ItemScreen.css'
 import { clothingArray } from "../Data/DummyData";
@@ -18,12 +18,20 @@ import { clothingArray } from "../Data/DummyData";
 //   },
 const ItemScreen = () => {
     let params = useParams();
-    let item = clothingArray[params.id];
+    let nav = useNavigate();
+    console.log(clothingArray);
+    // Double equal since types are different.
+    let item = clothingArray.find(e => e['id'] == params.id);
     let itemAttrClass = "w-100";
+
     return (
         <div className="h-100 fullscreen-background">
+            <div className="d-flex justify-content-center align-items-center clickable" 
+                    style={{height: "2rem", width: "3rem", background: "#A1E5BF", borderRadius: "10px", margin: "1rem"}}
+                    onClick={() => { nav(-1); } }> Back </div>
             <div>
-                <div className="text-white container-background top-margin" style={{padding: "2rem"}}>
+                <div style={{ marginTop: "6vh",marginLeft: "10vw", marginRight: "10vw"}}></div>
+                <div className="text-white container-background" style={{padding: "2rem"}}>
                     <div className={itemAttrClass + " d-flex flex-column"}>
 
                         <div style={{fontSize: "1.75rem", fontWeight: "600"}}>{item['title']}</div>
