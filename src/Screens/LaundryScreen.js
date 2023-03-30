@@ -1,4 +1,5 @@
 import * as React from "react";
+import {Button} from 'react-bootstrap';
 import ClothingViewer from "../Components/ClothingViewer";
 
 const LaundryScreen = (props) => {
@@ -6,7 +7,10 @@ const LaundryScreen = (props) => {
 
   return (
     <div>
-      <h1>Laundry</h1>
+      <div className="closetHeader">
+        <h1>Laundry</h1>
+        <Button className="closetHeaderButtonItem">Search</Button>
+      </div>
       <ClothingViewer clothingArray={props.dirtyClothes} />
     </div>
   );
