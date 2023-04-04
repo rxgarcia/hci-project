@@ -3,6 +3,7 @@ import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import { useState } from "react";
 import ClothingCategoryViewer from "./ClothingCategoryPage";
+import "./Components.css";
 
 const ClothingViewer = ({
   clothingArray,
@@ -39,10 +40,10 @@ const ClothingViewer = ({
       <Tabs
         defaultActiveKey={homeDetails.state ? homeDetails.state.layer : "all"}
         id="uncontrolled-tab-example"
-        className="mb-1"
+        className="clothingViewerTabs"
         fill
       >
-        <Tab eventKey="all" title="All">
+        <Tab eventKey="all" title="All" tabClassName="clothingViewerTab">
           <ClothingCategoryViewer
             category="all"
             clothingArray={filteredClothes}

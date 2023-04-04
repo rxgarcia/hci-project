@@ -15,6 +15,10 @@
     background: linear-gradient(180deg, #45605E 28.72%, #253433 100%);
 }
 
+.confirmOutfitHeight {
+    height: 115%;
+}
+
 .container-background {
     background: rgba(255, 255, 255, 0.09);
     border: 1px solid #45605F;

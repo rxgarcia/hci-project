@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const ClothingCategoryViewer = (props) => {
-  console.log(props.category);
   let clothingArray = props.clothingArray;
   let nav = useNavigate()
   const handleItemClicked = () => {};
@@ -28,7 +27,7 @@ const ClothingCategoryViewer = (props) => {
             return <img onClick={() => {props.addSelectedItems(item)}} className="categoryItem" src={item.image} alt={item.title} />;
           } else {
             return (
-              <Link to={"/item/" + item.id}>
+              <Link to={"/item/" + item.id} key={index}>
                 <img className="categoryItem" src={item.image} alt={item.title} />
               </Link>
             );

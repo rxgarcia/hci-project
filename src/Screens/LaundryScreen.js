@@ -6,10 +6,18 @@ import ClothingViewer from "../Components/ClothingViewer";
 const LaundryScreen = (props) => {
 
   return (
-    <div>
+    <div className="laundry-background">
       <div className="closetHeader">
-        <h1>Laundry</h1>
         <Button onClick={() => {props.setDirtyClothes([])}}>Clean All</Button>
+      </div>
+      <div
+        className="d-flex justify-content-center align-items-center text-white"
+        style={{
+          fontSize: "2rem",
+          fontWeight: "600",
+        }}
+      >
+        Your Laundry
       </div>
       <ClothingViewer clothingArray={props.dirtyClothes} />
     </div>

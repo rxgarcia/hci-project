@@ -2,13 +2,22 @@ import * as React from "react";
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import { Button } from "react-bootstrap";
+import { PlusCircleFill } from "react-bootstrap-icons";
 import ClothingViewer from "../Components/ClothingViewer";
+
+const styleSlider = [
+  "Super Casual",
+  "Casual",
+  "Business Casual",
+  "Business Formal",
+  "Formal",
+];
 
 const GenerationScreen = (props) => {
   const [inclusions, setInclusions] = useState([]);
   const [exclusions, setExclusions] = useState([]);
-  const [styleLevel, setStyleLevel] = useState(50);
   const [previewOutfit, setPreviewOutfit] = useState([]);
+  const [calculatedStyle, setCalculatedStyle] = useState(2);
 
   const [displayInclude, setDisplayInclude] = useState(false);
   const [displayExclude, setDisplayExclude] = useState(false);
@@ -34,7 +43,6 @@ const GenerationScreen = (props) => {
 
   const handleGenerate = () => {
     console.log(props.currentWeather);
-    console.log(Math.ceil(styleLevel / 20));
 
     console.log(exclusions);
 
@@ -58,9 +66,11 @@ const GenerationScreen = (props) => {
     if (exclusions.length > 0) {
       console.log("EXCLUDING: ", exclusions);
       for (let i = 0; i < exclusions.length; i++) {
-        clothes = clothes.filter((item) => { return item.id !== exclusions[i].id});
+        clothes = clothes.filter((item) => {
+          return item.id !== exclusions[i].id;
+        });
       }
-      console.log(clothes)
+      console.log(clothes);
     }
 
     // THIS IS SO JANK I KNOW IM SORRY THIS WILL BE FIXED LATER BUT DOESNT MATTER FOR NOW
@@ -106,14 +116,27 @@ const GenerationScreen = (props) => {
   };
 
   const handleConfirmOutfit = () => {
-    props.setCurrentOutfit({top: [previewOutfit[0]], bottom: [previewOutfit[1]], shoes: [previewOutfit[2]]});
+    props.setCurrentOutfit({
+      top: [previewOutfit[0]],
+      bottom: [previewOutfit[1]],
+      shoes: [previewOutfit[2]],
+    });
     props.addDirtyClothes(previewOutfit);
     setPreviewOutfit([]);
   };
 
   return (
-    <div className="genScreen">
-      <h1>Generation Screen</h1>
+    <div className={"fullscreen-background " + ((inclusions.length !== 0 || exclusions.length !== 0) && previewOutfit.length !== 0 ? "confirmOutfitHeight" : "")}>
+      <div
+        className="d-flex justify-content-center align-items-center text-white"
+        style={{
+          fontSize: "2rem",
+          margin: "20px",
+          fontWeight: "600",
+        }}
+      >
+        Outfit Generator
+      </div>
       <div className="clothingViewerContainer generationContainer">
         <h2>Attributes</h2>
         <Form>
@@ -148,13 +171,13 @@ const GenerationScreen = (props) => {
             />
             <h2>Style</h2>
             <div className="genSlider">
-              <p>Comfortable</p>
               <Form.Range
+                max={99}
                 onChange={(e) => {
-                  setStyleLevel(e.target.value);
+                  setCalculatedStyle(Math.floor(e.target.value / 20));
                 }}
               />
-              <p>Formal</p>
+              <p>{styleSlider[calculatedStyle]}</p>
             </div>
             <h2>Inclusions</h2>
             <div>
@@ -163,13 +186,13 @@ const GenerationScreen = (props) => {
                   <img className="categoryItem" src={item.image} alt="img" />
                 );
               })}
-              <Button
+              <PlusCircleFill
                 onClick={() => {
                   setDisplayInclude(!displayInclude);
                 }}
-              >
-                Add
-              </Button>
+                size={20}
+                style={{ margin: "10px" }}
+              />
               {displayInclude ? (
                 <ClothingViewer
                   clothingArray={props.clothingArray}
@@ -187,13 +210,13 @@ const GenerationScreen = (props) => {
                   <img className="categoryItem" src={item.image} alt="img" />
                 );
               })}
-              <Button
+              <PlusCircleFill
                 onClick={() => {
                   setDisplayExclude(!displayExclude);
                 }}
-              >
-                Add
-              </Button>
+                size={20}
+                style={{ margin: "10px" }}
+              />
               {displayExclude ? (
                 <ClothingViewer
                   clothingArray={props.clothingArray}
@@ -204,26 +227,33 @@ const GenerationScreen = (props) => {
                 <></>
               )}
             </div>
-            <Button
-              onClick={() => {
-                handleGenerate();
-              }}
-            >
-              Generate
-            </Button>
           </div>
-          {console.log(previewOutfit)}
+        </Form>
+      </div>
+      <div className="confirmBar">
+        {previewOutfit.length === 0 ? (
+          <Button
+            onClick={() => {
+              handleGenerate();
+            }}
+          >
+            Generate
+          </Button>
+        ) : (
+          <></>
+        )}
+        <div className="outfitPreview">
           {previewOutfit.map((item, index) => {
             return (
               <img className="categoryItem" src={item.image} alt={item.title} />
             );
           })}
-          {previewOutfit.length !== 0 ? (
-            <Button onClick={handleConfirmOutfit}>Confirm Outfit</Button>
-          ) : (
-            <></>
-          )}
-        </Form>
+        </div>
+        {previewOutfit.length !== 0 ? (
+          <Button className="confirmOutfitButton" onClick={handleConfirmOutfit}>Confirm Outfit</Button>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );
