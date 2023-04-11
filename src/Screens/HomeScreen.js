@@ -130,7 +130,7 @@ const HomeScreen = (props) => {
       >
         {layers.map((layer, index) => {
           return (
-            <Row className="layer">
+            <Row className="layer" key={index}>
               {props.currentOutfit[layer].map((item, index) => {
                 return (
                   <Col className="my-auto" xs="5">
