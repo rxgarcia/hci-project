@@ -13,6 +13,7 @@ import {
 } from "react-bootstrap-icons";
 import { useNavigate } from "react-router-dom";
 import clothingArray from "../Data/DummyData";
+import ClothingViewer from "../Components/ClothingViewer";
 
 const HomeScreen = (props) => {
   const weatherCodes = {
@@ -48,6 +49,7 @@ const HomeScreen = (props) => {
 
   const [temp, setTemp] = useState(-1);
   const [weather, setWeather] = useState("Loading...");
+  const [clothingViewer, setClothingViewer] = useState(false);
 
   async function fetchWeather() {
     try {
@@ -78,7 +80,7 @@ const HomeScreen = (props) => {
       shoes: [shoe],
     };
     props.setCurrent(outfit);
-    props.addDirtyClothes([top, bottom, shoe])
+    props.addDirtyClothes([top, bottom, shoe]);
   }
 
   useEffect(() => {
@@ -155,15 +157,11 @@ const HomeScreen = (props) => {
                   className="addbutton"
                   size={20}
                   onClick={() => {
-                    let cat = layer;
-                    if (cat.at(-1) != "s") {
-                      cat = cat + "s";
-                    }
-                    console.log("asdasd" + layer);
-                    nav("/Closet", { state: { layer: cat } });
+                    setClothingViewer(!clothingViewer);
                   }}
                 ></PlusCircleFill>
               </Col>
+              {clothingViewer ? <ClothingViewer clothingArray={props.clothingArray}/> : <></>}
             </Row>
           );
         })}

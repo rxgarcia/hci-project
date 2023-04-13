@@ -67,6 +67,7 @@ function App() {
             path="/"
             element={
               <HomeScreen
+                clothingArray={data}
                 currentOutfit={currentOutfit}
                 setCurrent={setCurrentOutfit}
                 addDirtyClothes={handleAddDirtyClothes}
