@@ -8,6 +8,7 @@ import "./HomeScreen.css";
 const ClosetScreen = ({ clothingArray, addHelper, addDirtyClothes }) => {
   const state = useLocation();
 
+
   return (
     <div className="fullscreen-background">
       <div className="closetHeader">

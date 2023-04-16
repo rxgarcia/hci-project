@@ -2,7 +2,10 @@ import { useState } from "react";
 import "../App.css";
 import "./ItemScreen.css";
 import { clothingArray } from "../Data/DummyData";
-import { Link, redirect, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+
+import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { initializeApp } from "firebase/app";
 
 const AddItemScreen = ({ clothingArray, setData }) => {
   // {
@@ -18,6 +21,17 @@ const AddItemScreen = ({ clothingArray, setData }) => {
   //     weather: "Cold",
   //     comfort: 1,
   //   },
+  const firebaseConfig = {
+    apiKey: "AIzaSyCzJh9PCteEGk_71TwNsM0uuSQblThgwyc",
+    authDomain: "fitcheck-64140.firebaseapp.com",
+    projectId: "fitcheck-64140",
+    storageBucket: "fitcheck-64140.appspot.com",
+    messagingSenderId: "977927035828",
+    appId: "1:977927035828:web:974f8811b8bdb9a67970e1"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const storage = getStorage(app);
   let [name, setName] = useState("");
   let [description, setDesc] = useState("");
   let [colors, setColors] = useState("");
@@ -30,6 +44,11 @@ const AddItemScreen = ({ clothingArray, setData }) => {
 
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
+      let imgRef = ref(storage, event.target.files[0].name);
+      console.log(imgRef);
+      uploadBytes(imgRef, event.target.files[0]).then((snapshot) => {
+        console.log(snapshot);
+      })
       setImage(URL.createObjectURL(event.target.files[0]));
     }
   };
@@ -38,12 +57,13 @@ const AddItemScreen = ({ clothingArray, setData }) => {
     console.log(clothingArray[clothingArray.length - 1].id);
     let colorArray = colors.split(",");
     colorArray.forEach((value, idx) => (colorArray[idx] = value.trim()));
+    console.log(image);
     let newArrayObj = {
       id: clothingArray[clothingArray.length - 1]["id"] + 1,
       title: name,
       description: description,
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png",
+        image,
       colors: colorArray,
       size: size,
       currentNumWears: 0,
