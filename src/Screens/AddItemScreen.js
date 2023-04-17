@@ -2,9 +2,13 @@ import { useState } from "react";
 import "../App.css";
 import "./ItemScreen.css";
 import { clothingArray } from "../Data/DummyData";
-import { Link, redirect, useNavigate } from "react-router-dom";
+import { collection, addDoc } from "firebase/firestore";
+import { Link, useNavigate } from "react-router-dom";
 
-const AddItemScreen = ({ clothingArray, setData }) => {
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import { initializeApp } from "firebase/app";
+
+const AddItemScreen = ({ clothingArray, setData, db}) => {
   // {
   //     title: "Patagonia Synchilla White Fleece",
   //     description: "Patagonia Synchilla White Fleece with blue trim.",
@@ -18,6 +22,17 @@ const AddItemScreen = ({ clothingArray, setData }) => {
   //     weather: "Cold",
   //     comfort: 1,
   //   },
+  const firebaseConfig = {
+    apiKey: process.env.API_KEY,
+    authDomain: "fitcheck-64140.firebaseapp.com",
+    projectId: "fitcheck-64140",
+    storageBucket: "fitcheck-64140.appspot.com",
+    messagingSenderId: "977927035828",
+    appId: process.env.APP_ID
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const storage = getStorage(app);
   let [name, setName] = useState("");
   let [description, setDesc] = useState("");
   let [colors, setColors] = useState("");
@@ -27,23 +42,29 @@ const AddItemScreen = ({ clothingArray, setData }) => {
   let [comfort, setComfort] = useState("Casual");
   let [weather, setWeather] = useState("Cold");
   let [image, setImage] = useState(null);
+  const nav = useNavigate();
 
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
-      setImage(URL.createObjectURL(event.target.files[0]));
+      let imgRef = ref(storage, event.target.files[0].name);
+      uploadBytes(imgRef, event.target.files[0]).then((snapshot) => {
+        console.log(snapshot);
+      });
+      getDownloadURL(imgRef).then((url) => setImage(url));
+      // setImage(URL.createObjectURL(event.target.files[0]));
     }
   };
 
-  function onSubmit() {
+  async function onSubmit() {
     console.log(clothingArray[clothingArray.length - 1].id);
     let colorArray = colors.split(",");
     colorArray.forEach((value, idx) => (colorArray[idx] = value.trim()));
+    console.log(image);
     let newArrayObj = {
-      id: clothingArray[clothingArray.length - 1]["id"] + 1,
       title: name,
       description: description,
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png",
+        image,
       colors: colorArray,
       size: size,
       currentNumWears: 0,
@@ -52,8 +73,12 @@ const AddItemScreen = ({ clothingArray, setData }) => {
       weather: weather,
       comfort: comfortLevels[comfort],
     };
+    const doc = await addDoc(collection(db, "articles"), newArrayObj);
+    console.log("document");
+    console.log(doc);
+    newArrayObj.id = doc.id;
     setData([...clothingArray, newArrayObj]);
-    console.log(clothingArray);
+    nav("/closet");
   }
   let comfortLevels = {
     Casual: 1,
@@ -91,6 +116,8 @@ const AddItemScreen = ({ clothingArray, setData }) => {
               backgroundSize: "cover",
               color: "transparent",
             }}
+            accept="image/*"
+            capture="environment"
             onChange={onImageChange}
           />
 
@@ -140,7 +167,6 @@ const AddItemScreen = ({ clothingArray, setData }) => {
             <option value="Formal"> Formal </option>
           </select>
           <div className="w-100 d-flex justify-content-center align-items-center">
-            <Link to="/closet">
               <button
                 style={{
                   marginTop: "1rem",
@@ -153,7 +179,6 @@ const AddItemScreen = ({ clothingArray, setData }) => {
                 {" "}
                 Add{" "}
               </button>
-            </Link>
           </div>
         </div>
       </div>
