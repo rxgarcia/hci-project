@@ -42,29 +42,32 @@ const AddItemScreen = ({ clothingArray, setData, db}) => {
   let [comfort, setComfort] = useState("Casual");
   let [weather, setWeather] = useState("Cold");
   let [image, setImage] = useState(null);
+  let [imgStruct, setImgStruct] = useState(null);
   const nav = useNavigate();
 
   const onImageChange = (event) => {
+    console.log("Inside onImageChange");
     if (event.target.files && event.target.files[0]) {
-      let imgRef = ref(storage, event.target.files[0].name);
-      uploadBytes(imgRef, event.target.files[0]).then((snapshot) => {
-        console.log(snapshot);
-      });
-      getDownloadURL(imgRef).then((url) => setImage(url));
-      // setImage(URL.createObjectURL(event.target.files[0]));
+      setImage(URL.createObjectURL(event.target.files[0]));
+      console.log("on image change");
+      console.log(event.target.files[0]);
+      setImgStruct(event.target.files[0]);
     }
   };
 
   async function onSubmit() {
-    console.log(clothingArray[clothingArray.length - 1].id);
+    let imgRef = ref(storage, imgStruct.name);
+    await uploadBytes(imgRef, imgStruct);
+    let downloadUrl = await getDownloadURL(imgRef);
     let colorArray = colors.split(",");
     colorArray.forEach((value, idx) => (colorArray[idx] = value.trim()));
     console.log(image);
+    console.log(downloadUrl);
     let newArrayObj = {
       title: name,
       description: description,
       image:
-        image,
+        downloadUrl,
       colors: colorArray,
       size: size,
       currentNumWears: 0,
