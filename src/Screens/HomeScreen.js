@@ -5,7 +5,7 @@ import { Row, Col, Button, Toast, ToastContainer } from "react-bootstrap";
 import { layers } from "../Data/DummyData";
 import "../App.css";
 import "./HomeScreen.css";
-import { PlusCircleFill, XCircleFill, SquareFill } from "react-bootstrap-icons";
+import { PlusCircleFill, XCircleFill, SquareFill, TrashFill } from "react-bootstrap-icons";
 import ClothingModal from "../Components/ClothingModal";
 
 const HomeScreen = (props) => {
@@ -44,6 +44,7 @@ const HomeScreen = (props) => {
   const [showModal, setShow] = useState(false);
   const [showConfirm, setConfirm] = useState(false);
   const [showRandom, setRandom] = useState(false);
+  const [showClear, setClear] = useState(false);
   const [showError, setError] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -148,6 +149,15 @@ const HomeScreen = (props) => {
         className="text-white container-background"
         style={{ padding: "2rem" }}
       >
+        <TrashFill size={30} className="trash" onClick={() => {
+          const clear = {
+            top: [],
+            bottom: [],
+            shoes: [],
+          }
+          props.setCurrent(clear)
+          setClear(true)
+        }} />
         {layers.map((layer, index) => {
           return (
             <Row className="layer" key={index}>
@@ -246,6 +256,20 @@ const HomeScreen = (props) => {
           </Toast.Header>
           <Toast.Body className="toastbody">
             Your outfit for the day has been randomized and is shown below.
+          </Toast.Body>
+        </Toast>
+        <Toast
+          bg="light"
+          show={showClear}
+          onClose={() => setClear(false)}
+          delay={5000}
+          autohide
+        >
+          <Toast.Header>
+            <strong className="m-auto toastheader">Outfit Cleared</strong>
+          </Toast.Header>
+          <Toast.Body className="toastbody">
+            Cleared current outfit. Note this does not remove confirmed outfits from laundry basket.
           </Toast.Body>
         </Toast>
         <Toast

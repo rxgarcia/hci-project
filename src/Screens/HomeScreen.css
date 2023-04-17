@@ -101,3 +101,10 @@
     font-weight: bolder;
 }
 
+.trash {
+    position: absolute;
+    right: 10px;
+    top: 12px;
+    color:rgb(180, 180, 180)
+}
+
