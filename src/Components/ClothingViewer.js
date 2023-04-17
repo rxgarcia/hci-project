@@ -1,7 +1,7 @@
 import * as React from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ClothingCategoryViewer from "./ClothingCategoryPage";
 import "./Components.css";
 
@@ -14,6 +14,12 @@ const ClothingViewer = ({
 }) => {
   const [query, setQuery] = useState("");
   const [filteredClothes, setFilteredClothes] = useState(clothingArray);
+
+  // update filteredCLothes when clothingArray is modified
+  useEffect(() => {
+    setFilteredClothes(clothingArray);
+  }, [clothingArray]);
+
 
   const handleQuery = (text) => {
     setQuery(text);

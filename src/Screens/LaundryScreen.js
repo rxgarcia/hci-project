@@ -1,13 +1,24 @@
 import * as React from "react";
 import { useState } from "react";
-import {Button} from 'react-bootstrap';
+import { Button } from "react-bootstrap";
 import ClothingViewer from "../Components/ClothingViewer";
 
 const LaundryScreen = (props) => {
+  const [clothesInLaundry, setClothesInLaundry] = useState(props.dirtyClothes);
+
+  const handleClearAll = () => {
+    props.setDirtyClothes([]);
+    setClothesInLaundry([]);
+  }
+
   return (
     <div className="laundry-background">
       <div className="closetHeader">
-        <Button onClick={() => {props.setDirtyClothes([])}}>Clean All</Button>
+        <Button
+          onClick={handleClearAll}
+        >
+          Clean All
+        </Button>
       </div>
       <div
         className="d-flex justify-content-center align-items-center text-white"
@@ -18,7 +29,7 @@ const LaundryScreen = (props) => {
       >
         Your Laundry
       </div>
-      <ClothingViewer clothingArray={props.dirtyClothes} />
+      <ClothingViewer clothingArray={clothesInLaundry} />
     </div>
   );
 };
