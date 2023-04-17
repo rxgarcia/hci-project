@@ -3,6 +3,7 @@ import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import { Button } from "react-bootstrap";
 import { PlusCircleFill } from "react-bootstrap-icons";
+import ClothingModal from "../Components/ClothingModal";
 import ClothingViewer from "../Components/ClothingViewer";
 
 const styleSlider = [
@@ -27,17 +28,20 @@ const GenerationScreen = (props) => {
   const [includeDirty, setIncludeDirty] = useState(false);
   const [preferFav, setPreferFav] = useState(false);
 
-  const handleIncludeItem = (item) => {
-    if (!exclusions.includes(item) && !inclusions.includes(item)) {
-      setInclusions([...inclusions, item]);
-    }
+  // item array from clothingModal
+  const handleIncludeItem = (selectedItems) => {
+    selectedItems = selectedItems.filter((item) => {
+      return !exclusions.includes(item) && !inclusions.includes(item);
+    })
+    setInclusions([...inclusions, ...selectedItems]);
     setDisplayInclude(!displayInclude);
   };
 
-  const handleExcludeItem = (item) => {
-    if (!exclusions.includes(item) && !inclusions.includes(item)) {
-      setExclusions([...exclusions, item]);
-    }
+  const handleExcludeItem = (selectedItems) => {
+    selectedItems = selectedItems.filter((item) => {
+      return !exclusions.includes(item) && !inclusions.includes(item);
+    })
+    setExclusions([...exclusions, ...selectedItems]);
     setDisplayExclude(!displayExclude);
   };
 
@@ -126,7 +130,15 @@ const GenerationScreen = (props) => {
   };
 
   return (
-    <div className={"fullscreen-background " + ((inclusions.length !== 0 || exclusions.length !== 0) && previewOutfit.length !== 0 ? "confirmOutfitHeight" : "")}>
+    <div
+      className={
+        "fullscreen-background " +
+        ((inclusions.length !== 0 || exclusions.length !== 0) &&
+        previewOutfit.length !== 0
+          ? "confirmOutfitHeight"
+          : "")
+      }
+    >
       <div
         className="d-flex justify-content-center align-items-center text-white"
         style={{
@@ -194,10 +206,16 @@ const GenerationScreen = (props) => {
                 style={{ margin: "10px" }}
               />
               {displayInclude ? (
-                <ClothingViewer
-                  clothingArray={props.clothingArray}
-                  addSelectedItems={handleIncludeItem}
-                  selectItems={true}
+                <ClothingModal
+                  layer="all"
+                  addHelper={handleIncludeItem}
+                  filteredClothes={props.clothingArray}
+                  currentOutfit={props.currentOutfit}
+                  inGenPage={true}
+                  addDirtyClothes={props.addDirtyClothes}
+                  handleClose={() => {
+                    setDisplayInclude(!displayInclude);
+                  }}
                 />
               ) : (
                 <></>
@@ -218,10 +236,16 @@ const GenerationScreen = (props) => {
                 style={{ margin: "10px" }}
               />
               {displayExclude ? (
-                <ClothingViewer
-                  clothingArray={props.clothingArray}
-                  addSelectedItems={handleExcludeItem}
-                  selectItems={true}
+                <ClothingModal
+                  layer="all"
+                  addHelper={handleExcludeItem}
+                  filteredClothes={props.clothingArray}
+                  currentOutfit={props.currentOutfit}
+                  inGenPage={true}
+                  addDirtyClothes={props.addDirtyClothes}
+                  handleClose={() => {
+                    setDisplayExclude(!displayExclude);
+                  }}
                 />
               ) : (
                 <></>
@@ -250,7 +274,9 @@ const GenerationScreen = (props) => {
           })}
         </div>
         {previewOutfit.length !== 0 ? (
-          <Button className="confirmOutfitButton" onClick={handleConfirmOutfit}>Confirm Outfit</Button>
+          <Button className="confirmOutfitButton" onClick={handleConfirmOutfit}>
+            Confirm Outfit
+          </Button>
         ) : (
           <></>
         )}

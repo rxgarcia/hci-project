@@ -128,7 +128,7 @@ const ClothingModal = (props) => {
             clothingArray={props.filteredClothes}
             addHelper={props.addHelper}
             addDirtyClothes={props.addDirtyClothes}
-            currentOutfit={props.currentOutfit[props.layer]}
+            currentOutfit={props.inGenPage ? [] : props.currentOutfit[props.layer]}
           />
         </Modal.Body>
         <Modal.Footer>

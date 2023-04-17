@@ -127,6 +127,7 @@ function App() {
                 clothingArray={data}
                 currentWeather={currentWeather}
                 setCurrentOutfit={setCurrentOutfit}
+                currentOutfit={currentOutfit}
                 addDirtyClothes={handleAddDirtyClothes}
               />
             }
