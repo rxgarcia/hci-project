@@ -20,18 +20,7 @@ const AddItemScreen = ({ clothingArray, setData }) => {
   //     category: "Top",
   //     weather: "Cold",
   //     comfort: 1,
-  //   },
-  const firebaseConfig = {
-    apiKey: "AIzaSyCzJh9PCteEGk_71TwNsM0uuSQblThgwyc",
-    authDomain: "fitcheck-64140.firebaseapp.com",
-    projectId: "fitcheck-64140",
-    storageBucket: "fitcheck-64140.appspot.com",
-    messagingSenderId: "977927035828",
-    appId: "1:977927035828:web:974f8811b8bdb9a67970e1"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const storage = getStorage(app);
+  //   }
   let [name, setName] = useState("");
   let [description, setDesc] = useState("");
   let [colors, setColors] = useState("");
@@ -111,6 +100,8 @@ const AddItemScreen = ({ clothingArray, setData }) => {
               backgroundSize: "cover",
               color: "transparent",
             }}
+            accept="image/*"
+            capture="environment"
             onChange={onImageChange}
           />
 

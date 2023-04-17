@@ -18,6 +18,8 @@ import clothingArray from "./Data/DummyData";
 import { useState } from "react";
 
 function App() {
+
+  
   let [data, setData] = useState(clothingArray);
   let [currentWeather, setCurrentWeather] = useState("Cold");
   let [currentOutfit, setCurrentOutfit] = useState({
