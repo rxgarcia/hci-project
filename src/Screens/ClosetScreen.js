@@ -5,9 +5,13 @@ import ClothingViewer from "../Components/ClothingViewer";
 import { PlusCircleFill } from "react-bootstrap-icons";
 import "./HomeScreen.css";
 
-const ClosetScreen = ({ clothingArray, addHelper, addDirtyClothes }) => {
+const ClosetScreen = ({ clothingArray, addHelper, addDirtyClothes, loading }) => {
   const state = useLocation();
 
+  if (loading)
+  {
+    return <div className="fullscreen-background"></div>
+  }
 
   return (
     <div className="fullscreen-background">

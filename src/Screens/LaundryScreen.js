@@ -4,7 +4,11 @@ import {Button} from 'react-bootstrap';
 import ClothingViewer from "../Components/ClothingViewer";
 
 const LaundryScreen = (props) => {
-
+  
+  if (props.loading)
+  {
+    return <div className="fullscreen-background"></div>
+  }
   return (
     <div className="laundry-background">
       <div className="closetHeader">

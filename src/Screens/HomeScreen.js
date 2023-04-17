@@ -66,9 +66,9 @@ const HomeScreen = (props) => {
   }
 
   function randomize() {
-    let tops = clothingArray.filter((e) => e["category"] == "Top");
-    let bottoms = clothingArray.filter((e) => e["category"] == "Bottom");
-    let shoes = clothingArray.filter((e) => e["category"] == "Shoes");
+    let tops = clothingArray.filter((e) => e["category"] === "Top");
+    let bottoms = clothingArray.filter((e) => e["category"] === "Bottom");
+    let shoes = clothingArray.filter((e) => e["category"] === "Shoes");
     const top = tops[Math.floor(Math.random() * tops.length)];
     const bottom = bottoms[Math.floor(Math.random() * bottoms.length)];
     const shoe = shoes[Math.floor(Math.random() * shoes.length)];
@@ -84,6 +84,11 @@ const HomeScreen = (props) => {
   useEffect(() => {
     fetchWeather();
   });
+
+  if (props.loading)
+  {
+    return <div className="fullscreen-background"></div>
+  }
 
   return (
     <div className="h-100 fullscreen-background">
@@ -156,7 +161,7 @@ const HomeScreen = (props) => {
                   size={20}
                   onClick={() => {
                     let cat = layer;
-                    if (cat.at(-1) != "s") {
+                    if (cat.at(-1) !== "s") {
                       cat = cat + "s";
                     }
                     console.log("asdasd" + layer);
