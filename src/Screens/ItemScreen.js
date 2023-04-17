@@ -15,13 +15,9 @@ import "./ItemScreen.css";
 //     weather: "Cold",
 //     comfort: 1,
 //   },
-const ItemScreen = ({ clothingArray, loading }) => {
+const ItemScreen = ({ clothingArray }) => {
   let params = useParams();
   let nav = useNavigate();
-  if (loading)
-  {
-    return <div className="fullscreen-background"></div>
-  }
   console.log(clothingArray);
   // Double equal since types are different.
   let item = clothingArray.find((e) => e["id"] == params.id);

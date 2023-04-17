@@ -8,7 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { initializeApp } from "firebase/app";
 
-const AddItemScreen = ({ clothingArray, setData, db, loading }) => {
+const AddItemScreen = ({ clothingArray, setData, db}) => {
   // {
   //     title: "Patagonia Synchilla White Fleece",
   //     description: "Patagonia Synchilla White Fleece with blue trim.",
@@ -43,11 +43,6 @@ const AddItemScreen = ({ clothingArray, setData, db, loading }) => {
   let [weather, setWeather] = useState("Cold");
   let [image, setImage] = useState(null);
   const nav = useNavigate();
-
-  if (loading)
-  {
-    return <div className="fullscreen-background"></div>
-  }
 
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {

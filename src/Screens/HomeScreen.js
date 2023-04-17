@@ -66,6 +66,7 @@ const HomeScreen = (props) => {
   }
 
   function randomize() {
+    let clothingArray = props.clothingArray;
     let tops = clothingArray.filter((e) => e["category"] === "Top");
     let bottoms = clothingArray.filter((e) => e["category"] === "Bottom");
     let shoes = clothingArray.filter((e) => e["category"] === "Shoes");
@@ -85,10 +86,6 @@ const HomeScreen = (props) => {
     fetchWeather();
   });
 
-  if (props.loading)
-  {
-    return <div className="fullscreen-background"></div>
-  }
 
   return (
     <div className="h-100 fullscreen-background">

@@ -27,11 +27,6 @@ const GenerationScreen = (props) => {
   const [includeDirty, setIncludeDirty] = useState(false);
   const [preferFav, setPreferFav] = useState(false);
 
-  if (props.loading)
-  {
-    return <div className="fullscreen-background"></div>
-  }
-
   const handleIncludeItem = (item) => {
     if (!exclusions.includes(item) && !inclusions.includes(item)) {
       setInclusions([...inclusions, item]);

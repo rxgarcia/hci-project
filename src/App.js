@@ -15,7 +15,6 @@ import ItemScreen from "./Screens/ItemScreen";
 import NavBar from "./Components/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AddItemScreen from "./Screens/AddItemScreen";
-import clothingArray from "./Data/DummyData";
 import { useState, useEffect } from "react";
 import { initializeApp } from "firebase/app";
 import { collection, getFirestore, getDocs } from "firebase/firestore";
@@ -82,6 +81,8 @@ function App() {
     console.log(updated);
     setCurrentOutfit(updated);
   };
+  if (loading)
+    return <div className="fullscreen-background"></div>
 
   return (
     <Router>
@@ -91,11 +92,11 @@ function App() {
             path="/"
             element={
               <HomeScreen
+                clothingArray={data}
                 currentOutfit={currentOutfit}
                 setCurrent={setCurrentOutfit}
                 addDirtyClothes={handleAddDirtyClothes}
                 removeHelper={handleRemoveCurrentCloth}
-                loading={loading}
               />
             }
           />
@@ -106,7 +107,6 @@ function App() {
                 clothingArray={data}
                 addHelper={handleAddToCurrent}
                 addDirtyClothes={handleAddDirtyClothes}
-                loading={loading}
               />
             }
           />
@@ -115,7 +115,6 @@ function App() {
             element={<LaundryScreen 
             dirtyClothes={dirtyClothes} 
             setDirtyClothes={setDirtyClothes} 
-            loading={loading}
             />}
           />
           <Route
@@ -131,11 +130,11 @@ function App() {
           />
           <Route
             path="/item/:id"
-            element={<ItemScreen clothingArray={data} loading={loading} />}
+            element={<ItemScreen clothingArray={data} />}
           />
           <Route
             path="/add_item"
-            element={<AddItemScreen clothingArray={data} setData={setData} db={db} loading={loading}/>}
+            element={<AddItemScreen clothingArray={data} setData={setData} db={db}/>}
           />
         </Routes>
       </div>
