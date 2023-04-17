@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
-import { Button } from "react-bootstrap";
+import { Button, ToastContainer, Toast } from "react-bootstrap";
 import { PlusCircleFill } from "react-bootstrap-icons";
 import ClothingModal from "../Components/ClothingModal";
 import ClothingViewer from "../Components/ClothingViewer";
@@ -19,6 +19,7 @@ const GenerationScreen = (props) => {
   const [exclusions, setExclusions] = useState([]);
   const [previewOutfit, setPreviewOutfit] = useState([]);
   const [calculatedStyle, setCalculatedStyle] = useState(2);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const [displayInclude, setDisplayInclude] = useState(false);
   const [displayExclude, setDisplayExclude] = useState(false);
@@ -126,6 +127,7 @@ const GenerationScreen = (props) => {
       shoes: [previewOutfit[2]],
     });
     props.addDirtyClothes(previewOutfit);
+    setShowConfirm(true);
     setPreviewOutfit([]);
   };
 
@@ -281,6 +283,25 @@ const GenerationScreen = (props) => {
           <></>
         )}
       </div>
+      <ToastContainer className="pt-3" position="top-center">
+      <Toast
+          bg="info"
+          show={showConfirm}
+          onClose={() => {
+            setShowConfirm(false);
+          }}
+          delay={4000}
+          autohide
+        >
+          <Toast.Header>
+            <strong className="m-auto toastheader">Outfit Confirmed</strong>
+          </Toast.Header>
+          <Toast.Body className="toastbody">
+            Your outfit for the day has been confirmed and added to your laundry
+            basket.
+          </Toast.Body>
+        </Toast>
+      </ToastContainer>
     </div>
   );
 };
