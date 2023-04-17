@@ -71,16 +71,18 @@ function App() {
     setCurrentOutfit(updated);
   };
 
-  const handleAddToCurrent = (item) => {
-    const cat = item.category.toLowerCase();
+  const handleAddToCurrent = (items) => {
+    if(items.length === 0) {
+      return
+    }
+    const cat = items[0].category.toLowerCase();
     let layer = currentOutfit[cat];
-    layer = layer.concat(item);
-    console.log(layer);
+    layer = layer.concat(items);
     let updated = { ...currentOutfit };
     updated[cat] = layer;
-    console.log(updated);
     setCurrentOutfit(updated);
   };
+
   if (loading)
     return <div className="fullscreen-background"></div>
 
@@ -97,6 +99,7 @@ function App() {
                 setCurrent={setCurrentOutfit}
                 addDirtyClothes={handleAddDirtyClothes}
                 removeHelper={handleRemoveCurrentCloth}
+                addHelper={handleAddToCurrent}
               />
             }
           />

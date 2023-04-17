@@ -9,13 +9,9 @@ const ClothingViewer = ({
   clothingArray,
   addSelectedItems,
   selectItems,
-  homeDetails,
   addHelper,
   addDirtyClothes,
 }) => {
-  if (!homeDetails) {
-    homeDetails = {};
-  }
   const [query, setQuery] = useState("");
   const [filteredClothes, setFilteredClothes] = useState(clothingArray);
 
@@ -38,7 +34,7 @@ const ClothingViewer = ({
         className="clothingViewerSearch"
       />
       <Tabs
-        defaultActiveKey={homeDetails.state ? homeDetails.state.layer : "all"}
+        defaultActiveKey={"all"}
         id="uncontrolled-tab-example"
         className="clothingViewerTabs"
         fill
@@ -49,7 +45,6 @@ const ClothingViewer = ({
             clothingArray={filteredClothes}
             addSelectedItems={addSelectedItems}
             selectItems={selectItems}
-            homeDetails={homeDetails}
             addHelper={addHelper}
             addDirtyClothes={addDirtyClothes}
           />
@@ -60,7 +55,6 @@ const ClothingViewer = ({
             clothingArray={filteredClothes}
             addSelectedItems={addSelectedItems}
             selectItems={selectItems}
-            homeDetails={homeDetails}
             addHelper={addHelper}
             addDirtyClothes={addDirtyClothes}
           />
@@ -71,7 +65,6 @@ const ClothingViewer = ({
             clothingArray={filteredClothes}
             addSelectedItems={addSelectedItems}
             selectItems={selectItems}
-            homeDetails={homeDetails}
             addHelper={addHelper}
             addDirtyClothes={addDirtyClothes}
           />
@@ -82,7 +75,6 @@ const ClothingViewer = ({
             clothingArray={filteredClothes}
             addSelectedItems={addSelectedItems}
             selectItems={selectItems}
-            homeDetails={homeDetails}
             addHelper={addHelper}
             addDirtyClothes={addDirtyClothes}
           />
@@ -93,7 +85,6 @@ const ClothingViewer = ({
             clothingArray={filteredClothes}
             addSelectedItems={addSelectedItems}
             selectItems={selectItems}
-            homeDetails={homeDetails}
             addHelper={addHelper}
             addDirtyClothes={addDirtyClothes}
           />

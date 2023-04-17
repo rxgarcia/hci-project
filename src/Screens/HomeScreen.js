@@ -1,18 +1,12 @@
 import * as React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { Row, Col, Button } from "react-bootstrap";
+import { Row, Col, Button, Toast, ToastContainer } from "react-bootstrap";
 import { layers } from "../Data/DummyData";
 import "../App.css";
 import "./HomeScreen.css";
-import {
-  Star,
-  StarFill,
-  PlusCircleFill,
-  XCircleFill,
-} from "react-bootstrap-icons";
-import { useNavigate } from "react-router-dom";
-import clothingArray from "../Data/DummyData";
+import { PlusCircleFill, XCircleFill, SquareFill } from "react-bootstrap-icons";
+import ClothingModal from "../Components/ClothingModal";
 
 const HomeScreen = (props) => {
   const weatherCodes = {
@@ -44,10 +38,16 @@ const HomeScreen = (props) => {
     95: "Moderate Thunderstorms",
   };
 
-  let nav = useNavigate();
-
   const [temp, setTemp] = useState(-1);
   const [weather, setWeather] = useState("Loading...");
+  const [modalLayer, setLayer] = useState("tops");
+  const [showModal, setShow] = useState(false);
+  const [showConfirm, setConfirm] = useState(false);
+  const [showRandom, setRandom] = useState(false);
+  const [showError, setError] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   async function fetchWeather() {
     try {
@@ -79,16 +79,33 @@ const HomeScreen = (props) => {
       shoes: [shoe],
     };
     props.setCurrent(outfit);
-    props.addDirtyClothes([top, bottom, shoe])
   }
-
   useEffect(() => {
     fetchWeather();
   });
 
+  const Article = (props) => {
+    return (
+      <div>
+        <img
+          className="homeItem"
+          src={props.item.image}
+          alt={props.item.title}
+        />
+        <XCircleFill
+          size={20}
+          className="remove"
+          onClick={() => {
+            props.removeHelper(props.item);
+          }}
+        />
+        <SquareFill size={12} className="homefiller" />
+      </div>
+    );
+  };
 
   return (
-    <div className="h-100 fullscreen-background">
+    <div className="h-100 fullscreen-background ">
       <div
         className="d-flex justify-content-center align-items-center text-white"
         style={{
@@ -126,6 +143,7 @@ const HomeScreen = (props) => {
       >
         Your Daily Outfit
       </div>
+
       <div
         className="text-white container-background"
         style={{ padding: "2rem" }}
@@ -135,20 +153,10 @@ const HomeScreen = (props) => {
             <Row className="layer" key={index}>
               {props.currentOutfit[layer].map((item, index) => {
                 return (
-                  <Col className="my-auto" xs="5">
-                    <div className="centerer">
-                      <img
-                        className="categoryItem"
-                        src={item.image}
-                        alt={item.title}
-                      />
+                  <Col className="d-flex" xs="5">
+                    <div className="articlecontainer">
+                      <Article item={item} removeHelper={props.removeHelper} />
                     </div>
-                    <XCircleFill
-                      className="remove"
-                      onClick={() => {
-                        props.removeHelper(item);
-                      }}
-                    />
                   </Col>
                 );
               })}
@@ -158,11 +166,8 @@ const HomeScreen = (props) => {
                   size={20}
                   onClick={() => {
                     let cat = layer;
-                    if (cat.at(-1) !== "s") {
-                      cat = cat + "s";
-                    }
-                    console.log("asdasd" + layer);
-                    nav("/Closet", { state: { layer: cat } });
+                    setLayer(cat);
+                    handleShow();
                   }}
                 ></PlusCircleFill>
               </Col>
@@ -170,16 +175,95 @@ const HomeScreen = (props) => {
           );
         })}
       </div>
+
+      {showModal ? (
+        <ClothingModal
+          layer={modalLayer}
+          currentOutfit={props.currentOutfit}
+          addHelper={props.addHelper}
+          filteredClothes={props.clothingArray}
+          addDirtyClothes={props.addDirtyClothes}
+          handleClose={() => {
+            handleClose();
+          }}
+        />
+      ) : null}
+
       <div className="text-center">
         <Button
-          className="randombutton"
+          className="randombutton m-3 mt-4"
           onClick={() => {
             randomize();
+            setRandom(true);
           }}
         >
           Randomize
         </Button>
+        <Button
+          className="confirmbutton m-3 mt-4"
+          onClick={() => {
+            let chosenOutfit = props.currentOutfit.top;
+            chosenOutfit = chosenOutfit.concat(props.currentOutfit.bottom);
+            chosenOutfit = chosenOutfit.concat(props.currentOutfit.shoes);
+            props.addDirtyClothes(chosenOutfit);
+            if(chosenOutfit.length === 0) {
+              setError(true)
+            } else {
+              setConfirm(true);
+            }
+          }}
+        >
+          Confirm
+        </Button>
       </div>
+      <ToastContainer className="pt-3" position="top-center">
+        <Toast
+          bg="info"
+          show={showConfirm}
+          onClose={() => {
+            setConfirm(false);
+          }}
+          delay={4000}
+          autohide
+        >
+          <Toast.Header>
+            <strong className="m-auto toastheader">Outfit Confirmed</strong>
+          </Toast.Header>
+          <Toast.Body className="toastbody">
+            Your outfit for the day has been confirmed and added to your laundry
+            basket.
+          </Toast.Body>
+        </Toast>
+        <Toast
+          bg="secondary"
+          show={showRandom}
+          onClose={() => setRandom(false)}
+          delay={4000}
+          autohide
+        >
+          <Toast.Header>
+            <strong className="m-auto toastheader">Outfit Randomized</strong>
+          </Toast.Header>
+          <Toast.Body className="toastbody">
+            Your outfit for the day has been randomized and is shown below.
+          </Toast.Body>
+        </Toast>
+        <Toast
+          bg="danger"
+          show={showError}
+          onClose={() => setError(false)}
+          delay={4000}
+          autohide
+        >
+          <Toast.Header>
+            <strong className="m-auto toastheader">Outfit Error</strong>
+          </Toast.Header>
+          <Toast.Body className="toastbody">
+            Error confirming outfit. Please make sure at least one article of
+            clothing is selected.
+          </Toast.Body>
+        </Toast>
+      </ToastContainer>
     </div>
   );
 };
