@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+
 import {
   CheckCircleFill,
   PlusCircleFill,
@@ -10,6 +11,7 @@ import {
 const ClothingModal = (props) => {
   const [selectedItems, setSelectedItems] = useState([]);
   const [refresh, refresher] = useState(false)
+
   const handleRemoveSelected = (item) => {
     const id = item.id;
     let item1 = selectedItems.find((e) => e["id"] == id);

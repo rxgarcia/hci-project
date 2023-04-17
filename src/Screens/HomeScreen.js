@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { Row, Col, Button, Toast, ToastContainer } from "react-bootstrap";
+import { Row, Col, Button, Toast, ToastContainer, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { layers } from "../Data/DummyData";
 import "../App.css";
 import "./HomeScreen.css";
@@ -9,6 +9,15 @@ import { PlusCircleFill, XCircleFill, SquareFill, TrashFill } from "react-bootst
 import ClothingModal from "../Components/ClothingModal";
 
 const HomeScreen = (props) => {
+  const [temp, setTemp] = useState(-1);
+  const [weather, setWeather] = useState("Loading...");
+  const [modalLayer, setLayer] = useState("tops");
+  const [showModal, setShow] = useState(false);
+  const [showConfirm, setConfirm] = useState(false);
+  const [showRandom, setRandom] = useState(false);
+  const [showClear, setClear] = useState(false);
+  const [showError, setError] = useState(false);
+
   const weatherCodes = {
     0: "Clear Skies",
     1: "Mainly Clear",
@@ -37,17 +46,9 @@ const HomeScreen = (props) => {
     86: "Heavy Snow Showers",
     95: "Moderate Thunderstorms",
   };
-
-  const [temp, setTemp] = useState(-1);
-  const [weather, setWeather] = useState("Loading...");
-  const [modalLayer, setLayer] = useState("tops");
-  const [showModal, setShow] = useState(false);
-  const [showConfirm, setConfirm] = useState(false);
-  const [showRandom, setRandom] = useState(false);
-  const [showClear, setClear] = useState(false);
-  const [showError, setError] = useState(false);
-
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false)
+  };
   const handleShow = () => setShow(true);
 
   async function fetchWeather() {
@@ -68,6 +69,7 @@ const HomeScreen = (props) => {
 
   function randomize() {
     let clothingArray = props.clothingArray;
+
     let tops = clothingArray.filter((e) => e["category"] === "Top");
     let bottoms = clothingArray.filter((e) => e["category"] === "Bottom");
     let shoes = clothingArray.filter((e) => e["category"] === "Shoes");
@@ -149,7 +151,13 @@ const HomeScreen = (props) => {
         className="text-white container-background"
         style={{ padding: "2rem" }}
       >
-        <TrashFill size={30} className="trash" onClick={() => {
+        {/* <OverlayTrigger
+          placement="top"
+          overlay={<Tooltip id="trash-tooltip">
+            Clear current selection.
+            </Tooltip>}>
+           */}
+          <TrashFill size={30} className="trash" onClick={() => {
           const clear = {
             top: [],
             bottom: [],
@@ -158,6 +166,8 @@ const HomeScreen = (props) => {
           props.setCurrent(clear)
           setClear(true)
         }} />
+        {/* </OverlayTrigger> */}
+        
         {layers.map((layer, index) => {
           return (
             <Row className="layer" key={index}>
@@ -200,6 +210,12 @@ const HomeScreen = (props) => {
       ) : null}
 
       <div className="text-center">
+      {/* <OverlayTrigger
+          placement="top"
+          overlay={<Tooltip id="trash-tooltip">
+            Clear current selection.
+            </Tooltip>}>
+           */}
         <Button
           className="randombutton m-3 mt-4"
           onClick={() => {
@@ -209,6 +225,7 @@ const HomeScreen = (props) => {
         >
           Randomize
         </Button>
+        {/* </OverlayTrigger> */}
         <Button
           className="confirmbutton m-3 mt-4"
           onClick={() => {
@@ -287,6 +304,37 @@ const HomeScreen = (props) => {
             clothing is selected.
           </Toast.Body>
         </Toast>
+        {/* <Toast
+          bg="info"
+          show={showAdded}
+          onClose={() => {
+            setAdded(false);
+          }}
+          delay={4000}
+          autohide
+        >
+          <Toast.Header>
+            <strong className="m-auto toastheader">Clothes Added</strong>
+          </Toast.Header>
+          <Toast.Body className="toastbody">
+            Successfully added {addedCount.length} {layerLabel} to outfit.
+          </Toast.Body>
+        </Toast>
+        <Toast
+          bg="warning"
+          show={showWarning}
+          onClose={() => setWarning(false)}
+          delay={4000}
+          autohide
+        >
+          <Toast.Header>
+            <strong className="m-auto toastheader">Outfit Randomized</strong>
+          </Toast.Header>
+          <Toast.Body className="toastbody">
+            Your outfit for the day has been randomized and is shown below.
+          </Toast.Body>
+        </Toast> */}
+        
       </ToastContainer>
     </div>
   );
