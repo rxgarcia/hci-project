@@ -1,4 +1,44 @@
 .clothingViewerTabs {
-    border-width: 0px;
-    font-size: 12px;
+  border-width: 0px;
+  font-size: 12px;
+}
+
+.transparent {
+  opacity: .9;
+}
+
+.modalItem {
+  width: 95px;
+  height: 95px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 5px;
+}
+
+.select {
+  position: absolute;
+  z-index: 1;
+  color: #A1E5BF;
+  right: -5px;
+  top: -5px;
+}
+
+.filler {
+    position: absolute;
+    z-index: 0;
+    color: #0b1610;
+    right: -1px;
+    top: -2px;
+  }
+
+.selectCheck {
+    position: absolute;
+    z-index: 1;
+    color: #0d6efd;
+    right: -5px;
+    top: -5px;
+}
+
+.selected {
+    border: 2px solid #0d6efd;
 }

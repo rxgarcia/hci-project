@@ -26,7 +26,6 @@ const ClosetScreen = ({ clothingArray, addHelper, addDirtyClothes }) => {
       </div>
       <ClothingViewer
         clothingArray={clothingArray}
-        homeDetails={state}
         addHelper={addHelper}
         addDirtyClothes={addDirtyClothes}
       />

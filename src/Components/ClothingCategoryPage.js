@@ -12,17 +12,11 @@ const ClothingCategoryViewer = (props) => {
     <div className="clothingViewerContainer">
       {clothingArray
         .filter((item) => {
-          if (props.category === "all" || props.category === item.category) {
+          if (props.category === "all" || props.category.toLowerCase() === item.category.toLowerCase()) {
             return item;
           }
         })
         .map((item, index) => {
-          if(props.homeDetails.state) {
-            return <img key={index} onClick={() => {props.addHelper(item)
-              nav("/")
-              props.addDirtyClothes(item)
-            }} className="categoryItem" src={item.image} alt={item.title} />;
-          } else 
           if (props.selectItems) {
             return <img onClick={() => {props.addSelectedItems(item)}} className="categoryItem" src={item.image} alt={item.title} />;
           } else {

@@ -11,7 +11,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     background: linear-gradient(180deg, #45605E 28.72%, #253433 100%);
 }
 
@@ -43,18 +43,24 @@
     min-height: 100px;
 }
 
-.remove {
+.articlecontainer {
     position: relative;
-    color: gray;
-    z-index: 1;
-    left: 5.3em;
-    top: -6.7em;
-
 }
 
-.centerer {
-    display: flex;
-    align-items: center;
+.homeItem {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 5px;
+  }
+
+.remove {
+    position: absolute;
+    z-index: 1;
+    color: gray;
+    right: 10px;
+    top: 10px;
 }
 
 .randombutton {
@@ -62,8 +68,43 @@
     color: black !important; 
     background-color: #A1E5BF !important;
     border-color: #A1E5BF !important;
-    width: 12em;
+    width: 150px;
     height: 3em;
     font-size: larger !important;
+}
+
+.confirmbutton {
+    margin-top: 2em;
+    color: black !important; 
+    background-color: #A1E5BF !important;
+    border-color: #A1E5BF !important;
+    width: 150px;
+    height: 3em;
+    font-size: larger !important;
+}
+
+.homefiller {
+    position: absolute;
+    z-index: 0;
+    color: #0b1610;
+    right: 14px;
+    top: 13px;
+  }
+
+.toastheader {
+    font-size: larger;
+    font-weight: 700;
+    color: #252525;
+}
+
+.toastbody {
+    font-weight: bolder;
+}
+
+.trash {
+    position: absolute;
+    right: 10px;
+    top: 12px;
+    color:rgb(180, 180, 180)
 }
 

@@ -5,6 +5,7 @@ import {
   Route,
   Routes,
   useNavigate,
+  useLocation
 } from "react-router-dom";
 import ClosetScreen from "./Screens/ClosetScreen";
 import HomeScreen from "./Screens/HomeScreen";
@@ -14,11 +15,12 @@ import ItemScreen from "./Screens/ItemScreen";
 import NavBar from "./Components/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AddItemScreen from "./Screens/AddItemScreen";
-import clothingArray from "./Data/DummyData";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { initializeApp } from "firebase/app";
+import { collection, getFirestore, getDocs } from "firebase/firestore";
 
 function App() {
-  let [data, setData] = useState(clothingArray);
+  let [data, setData] = useState();
   let [currentWeather, setCurrentWeather] = useState("Cold");
   let [currentOutfit, setCurrentOutfit] = useState({
     top: [],
@@ -26,6 +28,27 @@ function App() {
     shoes: [],
   });
   let [dirtyClothes, setDirtyClothes] = useState([]);
+  let [loading, setLoading] = useState(true);
+  const firebaseConfig = {
+    apiKey: process.env.API_KEY,
+    authDomain: "fitcheck-64140.firebaseapp.com",
+    projectId: "fitcheck-64140",
+    storageBucket: "fitcheck-64140.appspot.com",
+    messagingSenderId: "977927035828",
+    appId: process.env.APP_ID
+  };
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  useEffect(() => {
+    console.log("useEffect returning");
+    getDocs(collection(db, "articles")).then((querySnapshot) => {
+      let queryData = querySnapshot.docs.map((doc) => ({...doc.data(), id:doc.id}))
+      console.log(queryData);
+      setData(queryData);
+      setLoading(false);
+    })
+  }, []);
 
   const handleAddDirtyClothes = (items) => {
     setDirtyClothes(dirtyClothes.concat(items));
@@ -48,16 +71,20 @@ function App() {
     setCurrentOutfit(updated);
   };
 
-  const handleAddToCurrent = (item) => {
-    const cat = item.category.toLowerCase();
+  const handleAddToCurrent = (items) => {
+    if(items.length === 0) {
+      return
+    }
+    const cat = items[0].category.toLowerCase();
     let layer = currentOutfit[cat];
-    layer = layer.concat(item);
-    console.log(layer);
+    layer = layer.concat(items);
     let updated = { ...currentOutfit };
     updated[cat] = layer;
-    console.log(updated);
     setCurrentOutfit(updated);
   };
+
+  if (loading)
+    return <div className="fullscreen-background"></div>
 
   return (
     <Router>
@@ -67,10 +94,12 @@ function App() {
             path="/"
             element={
               <HomeScreen
+                clothingArray={data}
                 currentOutfit={currentOutfit}
                 setCurrent={setCurrentOutfit}
                 addDirtyClothes={handleAddDirtyClothes}
                 removeHelper={handleRemoveCurrentCloth}
+                addHelper={handleAddToCurrent}
               />
             }
           />
@@ -86,7 +115,10 @@ function App() {
           />
           <Route
             path="/laundry"
-            element={<LaundryScreen dirtyClothes={dirtyClothes} setDirtyClothes={setDirtyClothes}/>}
+            element={<LaundryScreen 
+            dirtyClothes={dirtyClothes} 
+            setDirtyClothes={setDirtyClothes} 
+            />}
           />
           <Route
             path="/generate"
@@ -105,7 +137,7 @@ function App() {
           />
           <Route
             path="/add_item"
-            element={<AddItemScreen clothingArray={data} setData={setData} />}
+            element={<AddItemScreen clothingArray={data} setData={setData} db={db}/>}
           />
         </Routes>
       </div>

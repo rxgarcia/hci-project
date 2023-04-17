@@ -4,7 +4,6 @@ import {Button} from 'react-bootstrap';
 import ClothingViewer from "../Components/ClothingViewer";
 
 const LaundryScreen = (props) => {
-
   return (
     <div className="laundry-background">
       <div className="closetHeader">
