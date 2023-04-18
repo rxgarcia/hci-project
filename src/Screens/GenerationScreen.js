@@ -5,6 +5,7 @@ import { Button, ToastContainer, Toast } from "react-bootstrap";
 import { PlusCircleFill } from "react-bootstrap-icons";
 import ClothingModal from "../Components/ClothingModal";
 import ClothingViewer from "../Components/ClothingViewer";
+import "./ItemScreen.css"
 
 const styleSlider = [
   "Super Casual",
