@@ -145,7 +145,7 @@ const GenerationScreen = (props) => {
         className="d-flex justify-content-center align-items-center text-white"
         style={{
           fontSize: "2rem",
-          margin: "20px",
+          padding: "20px",
           fontWeight: "600",
         }}
       >

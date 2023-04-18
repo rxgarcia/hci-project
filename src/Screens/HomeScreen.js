@@ -108,13 +108,13 @@ const HomeScreen = (props) => {
   };
 
   return (
-    <div className="h-100 fullscreen-background ">
+    <div className="fullscreen-background ">
       <div
         className="d-flex justify-content-center align-items-center text-white"
         style={{
-          marginTop: "1vh",
-          marginLeft: "10vw",
-          marginRight: "10vw",
+          paddingTop: "1vh",
+          paddingLeft: "10vw",
+          paddingRight: "10vw",
           fontSize: "2rem",
           fontWeight: "600",
         }}
