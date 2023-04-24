@@ -45,6 +45,7 @@ const HomeScreen = (props) => {
     85: "Slight Snow Showers",
     86: "Heavy Snow Showers",
     95: "Moderate Thunderstorms",
+    96: "Thunderstorms"
   };
   const handleClose = () => {
     setShow(false)
