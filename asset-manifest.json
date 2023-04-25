@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/hci-project/static/css/main.b8c3a7d8.css",
-    "main.js": "/hci-project/static/js/main.3902767b.js",
+    "main.css": "/hci-project/static/css/main.63b71b21.css",
+    "main.js": "/hci-project/static/js/main.97ade5f5.js",
     "static/js/787.232ed522.chunk.js": "/hci-project/static/js/787.232ed522.chunk.js",
     "static/media/logo.svg": "/hci-project/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/hci-project/index.html",
-    "main.b8c3a7d8.css.map": "/hci-project/static/css/main.b8c3a7d8.css.map",
-    "main.3902767b.js.map": "/hci-project/static/js/main.3902767b.js.map",
+    "main.63b71b21.css.map": "/hci-project/static/css/main.63b71b21.css.map",
+    "main.97ade5f5.js.map": "/hci-project/static/js/main.97ade5f5.js.map",
     "787.232ed522.chunk.js.map": "/hci-project/static/js/787.232ed522.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b8c3a7d8.css",
-    "static/js/main.3902767b.js"
+    "static/css/main.63b71b21.css",
+    "static/js/main.97ade5f5.js"
   ]
 }
